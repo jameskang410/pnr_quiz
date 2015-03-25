@@ -39,5 +39,5 @@ def insert_quote(character, quote):
 # insert_quote('Tom Haverford',"If you're off the grid, how are you gonna post photos of the dope food at restaurants you're at and all the cool places you're stuntin' in?")
 # insert_quote('Jeremy Jamm','I love Chinese crap. Lucy Liu, Gangnam Style, Nintendo, sushi, etc, etc.')
 # insert_quote('Tom Haverford',"If I know anything about Rwanda--and I don't--I bet it's full of rich guys who'll buy her whatever she wants.")
-insert_quote('April Ludgate','Time is money, money is power, power is pizza, and pizza is knowledge.')
-insert_quote('Andy Dwyer','R-E-S-P-E-G-C')
+# insert_quote('April Ludgate','Time is money, money is power, power is pizza, and pizza is knowledge.')
+# insert_quote('Andy Dwyer','R-E-S-P-E-G-C')
