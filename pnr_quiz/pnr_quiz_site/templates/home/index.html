@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+	<div class="container" ng-class="quizApp">
+
+	<!-- INTRO - BEFORE QUIZ -->
+		<div class="intro" ng-show="!inProgress">
+			OH HAI. WELCOME TO QUIZ. PRES TEH BUTN 2 START
+			<br>
+			<button id="start-button" class="btn btn-primary" ng-click="start()">START</button>
+		</div>
+
+	<!-- POST INTRO -->
+		<div class="quizzing" ng-show="inProgress">
+
+			<div id="score">
+				DIS SCORE: 7/10
+			</div>
+
+			<!-- ACTUAL QUIZ -->
+			<div ng-show="!quizOver">
+				<div class="question-text">
+					DIS AR TEH QUESHUN
+				</div>
+
+				<div class="response-field">
+					<input type="text">
+				</div>
+			</div>
+
+			<!-- QUIZ IS COMPLETE -->
+			<div ng-show="quizOver">
+				QUIZ DUN
+				<br>
+				<button id="restart-button" class="btn btn-primary" ng-click="reset()">RETRY</button>
+			</div>
+
+		</div>
+
+	</div>
+{% endblock %}
