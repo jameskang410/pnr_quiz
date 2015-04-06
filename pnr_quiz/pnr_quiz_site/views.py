@@ -2,17 +2,34 @@ from django.shortcuts import render
 
 from rest_framework import generics
 from pnr_quiz_site.models import PnrQuotes
-from pnr_quiz_site.serializers import PnrQuotesSerializer
+from pnr_quiz_site.serializers import PnrQuotesSerializer, CreatePnrQuotesSerializer
 
 # Create your views here.
 
-class QuotesList(generics.ListCreateAPIView):
+class QuotesList(generics.ListAPIView):
 	"""
-	Lists all QuotesList for API
+	Lists all quotes for API
 	"""
 	queryset = PnrQuotes.objects.all()
 	model = PnrQuotes
 	serializer_class = PnrQuotesSerializer
+
+class QuotesDetail(generics.RetrieveAPIView):
+	"""
+	Lists a specific quote for API
+	"""
+
+	lookup_field = 'quotes_key'
+	queryset = PnrQuotes.objects.all()
+	serializer_class = PnrQuotesSerializer
+
+class QuotesAdd(generics.CreateAPIView):
+	"""
+	Add new quotes for API
+	"""
+	queryset = PnrQuotes.objects.all()
+	model = PnrQuotes
+	serializer_class = CreatePnrQuotesSerializer
 
 def home(request):
 	"""

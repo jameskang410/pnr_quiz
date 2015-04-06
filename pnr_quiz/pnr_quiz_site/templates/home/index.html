@@ -2,7 +2,7 @@
 {% load static %}
 
 {% block content %}
-	<div class="container" ng-class="quizApp">
+	<div class="container" ng-app="quizApp">
 
 	<!-- INTRO - BEFORE QUIZ -->
 		<div class="intro" ng-show="!inProgress">
@@ -15,7 +15,7 @@
 		<div class="quizzing" ng-show="inProgress">
 
 			<div id="score">
-				DIS SCORE: 7/10
+				DIS SCORE: 7/10 
 			</div>
 
 			<!-- ACTUAL QUIZ -->
@@ -27,6 +27,7 @@
 				<div class="response-field">
 					<input type="text">
 				</div>
+				<button id="submit-button" class="btn btn-primary" ng-click="submit()">SUBMIT</button>
 			</div>
 
 			<!-- QUIZ IS COMPLETE -->

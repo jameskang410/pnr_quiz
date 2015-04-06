@@ -13,7 +13,7 @@ def insert_quote(character, quote):
 
     cursor = conn.cursor()
 
-    statement = "INSERT INTO pnr_quotes VALUES ($$%s$$,$$%s$$)" % (character, quote)
+    statement = "INSERT INTO pnr.pnr_quotes VALUES ($$%s$$,$$%s$$)" % (character, quote)
     try:
         cursor.execute(statement)
         conn.commit()
@@ -41,3 +41,5 @@ def insert_quote(character, quote):
 # insert_quote('Tom Haverford',"If I know anything about Rwanda--and I don't--I bet it's full of rich guys who'll buy her whatever she wants.")
 # insert_quote('April Ludgate','Time is money, money is power, power is pizza, and pizza is knowledge.')
 # insert_quote('Andy Dwyer','R-E-S-P-E-G-C')
+# insert_quote('Chris Traeger','Hopefully that will help any sensitivity you have around your boob hats.')
+# insert_quote('Leslie Knope',"Larry, just tell him I need to reschedule because I am trying to fix my bee hole disaster... Wait!... Don't mention my bee hole.")
