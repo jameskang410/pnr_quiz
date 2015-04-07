@@ -1,7 +1,9 @@
 {% load static %}
 
-<html lang="en">
+<html lang="en" ng-app="quizApp" ng-controller="QuizController">
 <head>
+    <meta charset="utf-8"/>
+
 	<link href="{% static 'css/bootstrap.css' %}" rel="stylesheet">
 	<script src="{% static 'js/angular.min.js' %}"></script>
 	<script src="{% static 'js/jquery-1.11.2.min.js' %}"></script>
@@ -13,3 +15,4 @@
 <body>
 	{% block content %} {% endblock %}
 </body>
+</html>

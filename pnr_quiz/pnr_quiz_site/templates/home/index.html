@@ -1,43 +1,39 @@
 {% extends 'base.html' %}
 {% load static %}
+{% csrf_token %}
 
 {% block content %}
-	<div class="container" ng-app="quizApp">
-
-	<!-- INTRO - BEFORE QUIZ -->
+	<div class="container">
+		<!-- INTRO - BEFORE QUIZ -->
 		<div class="intro" ng-show="!inProgress">
 			OH HAI. WELCOME TO QUIZ. PRES TEH BUTN 2 START
 			<br>
 			<button id="start-button" class="btn btn-primary" ng-click="start()">START</button>
 		</div>
 
-	<!-- POST INTRO -->
+		<!-- POST INTRO -->
 		<div class="quizzing" ng-show="inProgress">
-
 			<div id="score">
-				DIS SCORE: 7/10 
+				DIS SCORE: [[score]]/10 
 			</div>
-
 			<!-- ACTUAL QUIZ -->
 			<div ng-show="!quizOver">
 				<div class="question-text">
-					DIS AR TEH QUESHUN
+					[[question]]
+					[[questions_json]]
 				</div>
 
 				<div class="response-field">
-					<input type="text">
+					<input type="text" ng-model="userAnswer">
 				</div>
-				<button id="submit-button" class="btn btn-primary" ng-click="submit()">SUBMIT</button>
+				<button id="submit-button" class="btn btn-primary" ng-click="submit(userAnswer)">SUBMIT</button>
 			</div>
-
 			<!-- QUIZ IS COMPLETE -->
 			<div ng-show="quizOver">
 				QUIZ DUN
 				<br>
 				<button id="restart-button" class="btn btn-primary" ng-click="reset()">RETRY</button>
 			</div>
-
 		</div>
-
 	</div>
 {% endblock %}

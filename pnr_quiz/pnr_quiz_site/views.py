@@ -14,6 +14,14 @@ class QuotesList(generics.ListAPIView):
 	model = PnrQuotes
 	serializer_class = PnrQuotesSerializer
 
+class QuizList(generics.ListAPIView):
+	"""
+	Lists all quotes for API
+	"""
+	queryset = PnrQuotes.objects.all().order_by('?')[:10]
+	model = PnrQuotes
+	serializer_class = PnrQuotesSerializer
+
 class QuotesDetail(generics.RetrieveAPIView):
 	"""
 	Lists a specific quote for API

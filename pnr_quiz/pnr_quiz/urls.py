@@ -19,5 +19,7 @@ urlpatterns = patterns('',
     # view all quotes/rows
     url(r'^api/list/$', views.QuotesList.as_view(), name='quotes_list'),
     # post new quote
-    url(r'^api/add/$', views.QuotesAdd.as_view(), name='quotes_add')
+    url(r'^api/add/$', views.QuotesAdd.as_view(), name='quotes_add'),
+    # view 10 random quotes/rows for quiz
+    url(r'^api/quiz/$', views.QuizList.as_view(), name='quotes_quiz'),
 )
