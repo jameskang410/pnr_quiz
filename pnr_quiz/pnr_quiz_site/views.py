@@ -16,7 +16,7 @@ class QuotesList(generics.ListAPIView):
 
 class QuizList(generics.ListAPIView):
 	"""
-	Lists all quotes for API
+	Chooses 10 random quotes for API
 	"""
 	queryset = PnrQuotes.objects.all().order_by('?')[:10]
 	model = PnrQuotes
