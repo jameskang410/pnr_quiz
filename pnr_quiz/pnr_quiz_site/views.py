@@ -9,8 +9,19 @@ from pnr_quiz_site.serializers import PnrQuotesSerializer, CreatePnrQuotesSerial
 class QuotesList(generics.ListAPIView):
 	"""
 	Lists all quotes for API
+	For my own use. Should probably be disabled later.
 	"""
 	queryset = PnrQuotes.objects.all()
+	model = PnrQuotes
+	serializer_class = PnrQuotesSerializer
+
+class PersonList(generics.ListAPIView):
+	"""
+	Lists all unique people
+	Used for creating a dropdown of all possible choices
+	"""
+
+	queryset = PnrQuotes.objects.values('person').order_by('person').distinct()
 	model = PnrQuotes
 	serializer_class = PnrQuotesSerializer
 

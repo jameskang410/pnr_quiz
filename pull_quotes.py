@@ -43,3 +43,5 @@ def insert_quote(character, quote):
 # insert_quote('Andy Dwyer','R-E-S-P-E-G-C')
 # insert_quote('Chris Traeger','Hopefully that will help any sensitivity you have around your boob hats.')
 # insert_quote('Leslie Knope',"Larry, just tell him I need to reschedule because I am trying to fix my bee hole disaster... Wait!... Don't mention my bee hole.")
+# insert_quote('Leslie Knope',"I need the good stuff. The 'Mariah needs to sing tonight' stuff.")
+# insert_quote('Andy Dwyer', "Technically we're all dying unless you choose the right grail. It's the dusty one.")

@@ -22,4 +22,6 @@ urlpatterns = patterns('',
     url(r'^api/add/$', views.QuotesAdd.as_view(), name='quotes_add'),
     # view 10 random quotes/rows for quiz
     url(r'^api/quiz/$', views.QuizList.as_view(), name='quotes_quiz'),
+    # view all distinct persons
+    url(r'^api/persons/$', views.PersonList.as_view(), name='persons'),
 )

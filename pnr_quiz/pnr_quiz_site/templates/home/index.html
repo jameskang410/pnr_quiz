@@ -4,30 +4,40 @@
 
 {% block content %}
 	<div class="container">
-		<!-- INTRO - BEFORE QUIZ -->
+		<!-- INTRO - BEFORE QUIZ - inProgress = false-->
 		<div class="intro" ng-show="!inProgress">
 			OH HAI. WELCOME TO QUIZ. PRES TEH BUTN 2 START
 			<br>
 			<button id="start-button" class="btn btn-primary" ng-click="start()">START</button>
 		</div>
 
-		<!-- POST INTRO -->
+		<!-- POST INTRO - inProgress = true-->
 		<div class="quizzing" ng-show="inProgress">
 			<div id="score">
 				DIS SCORE: [[score]]/10 
 			</div>
-			<!-- ACTUAL QUIZ -->
+			<!-- ACTUAL QUIZ - quizOver = false-->
 			<div ng-show="!quizOver">
 				<div class="question-text">
 					[[question]]
 				</div>
 
-				<div class="response-field">
-					<input type="text" ng-model="userAnswer">
+				<div ng-show="answerMode">
+					<div class="response-field">
+						<!-- <input id="search-field" type="text" ng-model="userAnswer"> -->
+						<angucomplete-alt id="search-field" selected-object="userAnswer" title-field="person" local-data="array_people" search-fields="person" minlength="1" match-class="highlight" />
+					</div>
+
+					<button id="submit-button" class="btn btn-primary" ng-click="checkAnswer(userAnswer)">SUBMIT</button>
 				</div>
-				<button id="submit-button" class="btn btn-primary" ng-click="submit(userAnswer)">SUBMIT</button>
+
+				<div ng-show="!answerMode">
+					<button class="btn btn-primary" ng-click="nextQuestion()">Next</button>
+					<span ng-show="correctAnswer">Correct!</span>
+					<span ng-show="!correctAnswer">Wrong!</span>
+				</div>
 			</div>
-			<!-- QUIZ IS COMPLETE -->
+			<!-- QUIZ IS COMPLETE - quizOver = true-->
 			<div ng-show="quizOver">
 				QUIZ DUN
 				<br>
