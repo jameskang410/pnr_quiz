@@ -45,3 +45,4 @@ def insert_quote(character, quote):
 # insert_quote('Leslie Knope',"Larry, just tell him I need to reschedule because I am trying to fix my bee hole disaster... Wait!... Don't mention my bee hole.")
 # insert_quote('Leslie Knope',"I need the good stuff. The 'Mariah needs to sing tonight' stuff.")
 # insert_quote('Andy Dwyer', "Technically we're all dying unless you choose the right grail. It's the dusty one.")
+# insert_quote('Ron Swanson',"Well, cheer up. You've got a new job, new challenges. All that crap you like.")

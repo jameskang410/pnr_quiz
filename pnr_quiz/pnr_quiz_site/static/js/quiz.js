@@ -56,7 +56,7 @@ app.controller('QuizController', ['$http','$scope', '$timeout', 'personRetriever
     $scope.setFocus = function() {
         $timeout(function() {
         var searchField = document.getElementById('search-field_value');
-        console.log(searchField);
+        // console.log(searchField);
         searchField.focus();
         }, 0);
     };
@@ -78,8 +78,8 @@ app.controller('QuizController', ['$http','$scope', '$timeout', 'personRetriever
         $scope.score = 0;
         $scope.inProgress = true;
         $scope.quizOver = false;
-        console.log($scope.id);
-        console.log($scope.score);
+        // console.log($scope.id);
+        // console.log($scope.score);
         $scope.getQuestion();
     };
 
@@ -93,7 +93,7 @@ app.controller('QuizController', ['$http','$scope', '$timeout', 'personRetriever
             $scope.correct_answer = $scope.row['person'];
             $scope.answerMode = true;
             $scope.setFocus();
-            console.log($scope.array_people);
+            // console.log($scope.array_people);
         }
         //if all questions have been answered - aka quiz is over
         else {
@@ -102,16 +102,16 @@ app.controller('QuizController', ['$http','$scope', '$timeout', 'personRetriever
     };
 
     //Check answer
-    $scope.checkAnswer = function() {
+    var checkAnswer = function() {
 
-        if($scope.userAnswer.title == $scope.correct_answer) {
+        if($scope.userAnswer == $scope.correct_answer) {
             console.log('Hurray');
             $scope.score++;
             $scope.correctAnswer = true;
         }
         else {
             console.log('Boo');
-            console.log($scope.userAnswer.title);
+            console.log($scope.userAnswer);
             console.log($scope.correct_answer);
             $scope.correctAnswer = false;
         }
@@ -132,6 +132,13 @@ app.controller('QuizController', ['$http','$scope', '$timeout', 'personRetriever
         $scope.inProgress = false;
         $scope.grabQuestions();
 
+    };
+
+    //called when user selects an answer (basically acts as submit button)
+    $scope.answerSelect = function(selected) {
+        // console.log(selected);
+        $scope.userAnswer = selected.title;
+        checkAnswer();
     };
 
     //testing

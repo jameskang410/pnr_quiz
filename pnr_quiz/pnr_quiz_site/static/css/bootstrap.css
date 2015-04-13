@@ -6484,7 +6484,6 @@ body {
 
 /* Custom stuff... Probably need to move this over to another css file soon */
 
-.angucomplete-dropdown {
-    overflow-y: auto;
-    max-height: 200px; // your preference
-}
+.highlight {
+  font-weight: bold;
+};
