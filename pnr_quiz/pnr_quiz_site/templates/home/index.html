@@ -28,11 +28,11 @@
 						<angucomplete-alt id="search-field" selected-object="answerSelect" title-field="person" local-data="array_people" search-fields="person" minlength="1" match-class="highlight" />
 					</div>
 
-					<button id="submit-button" class="btn btn-primary" ng-click="checkAnswer(userAnswer)">SUBMIT</button>
+<!-- 					<button id="submit-button" class="btn btn-primary" ng-click="checkAnswer(userAnswer)">SUBMIT</button> -->
 				</div>
 
 				<div ng-show="!answerMode">
-					<button class="btn btn-primary" ng-click="nextQuestion()">Next</button>
+					<button id="next-question-button" class="btn btn-primary" ng-click="nextQuestion()">Next</button>
 					<span ng-show="correctAnswer">Correct!</span>
 					<span ng-show="!correctAnswer">Wrong!</span>
 				</div>

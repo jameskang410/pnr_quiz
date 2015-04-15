@@ -47,31 +47,31 @@ app.controller('QuizController', ['$http','$scope', '$timeout', 'personRetriever
     });
 
     //grabbing all questions - needs to be loaded initially and probably on the results/summary page (to be ready for a retry)
-    $scope.grabQuestions = function() {
+    var grabQuestions = function() {
         $http.get("api/quiz/?format=json").success(function(data) {
             $scope.questions_json = data;
         }); 
     };
+
     //set focus on input field if it's not hidden
-    $scope.setFocus = function() {
+    setFocus = function(searchField) {
         $timeout(function() {
-        var searchField = document.getElementById('search-field_value');
         // console.log(searchField);
         searchField.focus();
         }, 0);
     };
+
     //runs when page loads
     $scope.init = function () {
         //updating headers to align with Django CSRF stuff
         $http.defaults.xsrfCookieName = 'csrftoken';
         $http.defaults.xsrfHeaderName = 'X-CSRFToken';
         //grabbing all of the questions and answers initially
-        $scope.grabQuestions();
+        grabQuestions();
     };
 
     $scope.init();
     
-
     //Allows users to start the quiz - quiz moves on from intro screen
     $scope.start = function() {
         $scope.id = 0;
@@ -80,11 +80,11 @@ app.controller('QuizController', ['$http','$scope', '$timeout', 'personRetriever
         $scope.quizOver = false;
         // console.log($scope.id);
         // console.log($scope.score);
-        $scope.getQuestion();
+        getQuestion();
     };
 
     //grabbing a question
-    $scope.getQuestion = function() {
+    var getQuestion = function() {
         //if all 10 questions have not yet been answered
         if ($scope.id <= 9) {
             $scope.row = $scope.questions_json[$scope.id];
@@ -92,7 +92,7 @@ app.controller('QuizController', ['$http','$scope', '$timeout', 'personRetriever
             $scope.question = $scope.row['format_quote'];
             $scope.correct_answer = $scope.row['person'];
             $scope.answerMode = true;
-            $scope.setFocus();
+            setFocus(document.getElementById('search-field_value'));
             // console.log($scope.array_people);
         }
         //if all questions have been answered - aka quiz is over
@@ -103,12 +103,13 @@ app.controller('QuizController', ['$http','$scope', '$timeout', 'personRetriever
 
     //Check answer
     var checkAnswer = function() {
-
+        
         if($scope.userAnswer == $scope.correct_answer) {
             console.log('Hurray');
             $scope.score++;
             $scope.correctAnswer = true;
         }
+
         else {
             console.log('Boo');
             console.log($scope.userAnswer);
@@ -117,12 +118,14 @@ app.controller('QuizController', ['$http','$scope', '$timeout', 'personRetriever
         }
 
         $scope.answerMode = false;
+        setFocus(document.getElementById('next-question-button'));
+
     };
 
     //push to get the next question
     $scope.nextQuestion = function() {
         $scope.id++;
-        $scope.getQuestion();
+        getQuestion();
         //clearing the input field
         $scope.$broadcast('angucomplete-alt:clearInput');
     }
@@ -130,15 +133,18 @@ app.controller('QuizController', ['$http','$scope', '$timeout', 'personRetriever
     //reset - grabbing questions to be ready for restart
     $scope.reset = function() {
         $scope.inProgress = false;
-        $scope.grabQuestions();
+        grabQuestions();
 
     };
 
     //called when user selects an answer (basically acts as submit button)
     $scope.answerSelect = function(selected) {
-        // console.log(selected);
-        $scope.userAnswer = selected.title;
-        checkAnswer();
+
+        //selected-object of angulcomplete-alt calls the function with every letter inputted
+        if (typeof selected !== "undefined") {
+            $scope.userAnswer = selected.title;
+            checkAnswer();
+        };
     };
 
     //testing
