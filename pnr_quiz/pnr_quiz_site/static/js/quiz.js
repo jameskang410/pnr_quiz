@@ -1,4 +1,4 @@
-var app = angular.module('quizApp', ['angucomplete-alt']);
+var app = angular.module('quizApp', ['angucomplete-alt', 'angular-loading-bar', 'ngAnimate']);
 
 //Changing the template tags so that they don't conflict
 app.config(function($interpolateProvider) {
