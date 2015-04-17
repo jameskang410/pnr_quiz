@@ -1,16 +1,14 @@
-var app = angular.module('quizApp', ['angucomplete-alt', 'angular-loading-bar', 'ngAnimate']);
+var app = angular.module('quizApp', ['angucomplete-alt', 'angular-loading-bar']);
 
-//Changing the template tags so that they don't conflict
-app.config(function($interpolateProvider) {
+app.config(function($interpolateProvider, $httpProvider) {
+    //changing symbols so that it won't interfere with Django
     $interpolateProvider.startSymbol('[[');
     $interpolateProvider.endSymbol(']]');
+    
+    //updating headers to align with Django CSRF stuff
+    $httpProvider.defaults.xsrfCookieName = 'csrftoken';
+    $httpProvider.defaults.xsrfHeaderName = 'X-CSRFToken';
 });
-
-//Updating $http headers to align with Django CSRF stuff
-// function run($http) {
-//   $http.defaults.xsrfHeaderName = 'X-CSRFToken';
-//   $http.defaults.xsrfCookieName = 'csrftoken';
-// };
 
 //created a factory that will retrieve an array of people
 app.factory('personRetriever', function ($http, $q) {
@@ -34,54 +32,68 @@ app.factory('personRetriever', function ($http, $q) {
     return PersonRetriever;
 });
 
+app.factory('questionRetriever', function ($http, $q) {
 
-app.controller('QuizController', ['$http','$scope', '$timeout', 'personRetriever', function($http, $scope, $timeout, personRetriever) {
+    var QuestionRetriever = new Object();
 
-    //retrieving list of people through the PersonRetriever factory
-    //first returning a promise object
-    $scope.array_people = personRetriever.getpeople();
-    //promise object is resolved using then method, results are in data
-    //data is initially just a big JSON, but angucomplete has a title-field="person" field which pulls the person data only
-    $scope.array_people.then(function(data){
-        $scope.array_people = data;
-    });
+    QuestionRetriever.getquestions = function () {
 
-    //grabbing all questions - needs to be loaded initially and probably on the results/summary page (to be ready for a retry)
-    var grabQuestions = function() {
-        $http.get("api/quiz/?format=json").success(function(data) {
-            $scope.questions_json = data;
-        }); 
+        var deferred = $q.defer();
+
+        $http.get("api/quiz/?format=json").success(function(data){
+
+            deferred.resolve(data);
+        });
+
+        return deferred.promise;
     };
 
+    return QuestionRetriever;
+});
+
+app.controller('QuizController', ['$http','$scope', '$timeout', 'personRetriever', 'questionRetriever', 'cfpLoadingBar', 
+                                function($http, $scope, $timeout, personRetriever, questionRetriever, cfpLoadingBar) {
+
     //set focus on input field if it's not hidden
-    setFocus = function(searchField) {
+    var setFocus = function(searchField) {
         $timeout(function() {
         // console.log(searchField);
         searchField.focus();
         }, 0);
     };
-
-    //runs when page loads
-    $scope.init = function () {
-        //updating headers to align with Django CSRF stuff
-        $http.defaults.xsrfCookieName = 'csrftoken';
-        $http.defaults.xsrfHeaderName = 'X-CSRFToken';
-        //grabbing all of the questions and answers initially
-        grabQuestions();
-    };
-
-    $scope.init();
     
     //Allows users to start the quiz - quiz moves on from intro screen
     $scope.start = function() {
-        $scope.id = 0;
-        $scope.score = 0;
-        $scope.inProgress = true;
-        $scope.quizOver = false;
+        var gettingPersons = personRetriever.getpeople();
+        var gettingQuestions = questionRetriever.getquestions();
+
+        //chaining promises - ensures that data is loaded before doing something else
+        //array_people is set, then questions_json is set, then the window loads and question is retrieved
+        gettingPersons
+        .then(function(data){
+            $scope.array_people = data;
+        })
+        .then(function(data){
+            gettingQuestions
+            .then(function(data){
+                $scope.questions_json = data;
+                // console.log($scope.questions_json);
+                $scope.id = 0;
+                $scope.score = 0;
+                $scope.inProgress = true;
+                $scope.quizOver = false;
+                //arrays to hold user answers
+                $scope.user_answer_array = [];
+                getQuestion();
+            });
+        });
+        // $scope.id = 0;
+        // $scope.score = 0;
+        // $scope.inProgress = true;
+        // $scope.quizOver = false;
         // console.log($scope.id);
         // console.log($scope.score);
-        getQuestion();
-    };
+    };  
 
     //grabbing a question
     var getQuestion = function() {
@@ -97,13 +109,15 @@ app.controller('QuizController', ['$http','$scope', '$timeout', 'personRetriever
         }
         //if all questions have been answered - aka quiz is over
         else {
+            createSummary();
             $scope.quizOver = true;
         }
     };
 
     //Check answer
     var checkAnswer = function() {
-        
+        $scope.user_answer_array.push($scope.userAnswer);
+
         if($scope.userAnswer == $scope.correct_answer) {
             console.log('Hurray');
             $scope.score++;
@@ -133,8 +147,6 @@ app.controller('QuizController', ['$http','$scope', '$timeout', 'personRetriever
     //reset - grabbing questions to be ready for restart
     $scope.reset = function() {
         $scope.inProgress = false;
-        grabQuestions();
-
     };
 
     //called when user selects an answer (basically acts as submit button)
@@ -147,6 +159,23 @@ app.controller('QuizController', ['$http','$scope', '$timeout', 'personRetriever
         };
     };
 
+    var createSummary = function() {
+
+        $scope.jsonSummary = [];
+
+        for (var i = 0; i < $scope.questions_json.length; i++) {
+
+            $scope.jsonSummary.push({
+                question: $scope.questions_json[i]["format_quote"],
+                corrAnswer: $scope.questions_json[i]["person"],
+                usAnswer: $scope.user_answer_array[i]
+            });
+        };
+
+        console.log($scope.questions_json);
+        console.log($scope.user_answer_array);
+        console.log($scope.jsonSummary);
+    };
     //testing
     // $scope.update = function(){
     //     console.log('TEST');

@@ -41,6 +41,10 @@
 			<div ng-show="quizOver">
 				QUIZ DUN
 				<br>
+				Summary of Results:
+				<ol ng-repeat="item in jsonSummary">
+					<li>[[item.question]] - [[item.corrAnswer]] - [[item.usAnswer]]</li>
+				</ol>
 				<button id="restart-button" class="btn btn-primary" ng-click="reset()">RETRY</button>
 			</div>
 		</div>
