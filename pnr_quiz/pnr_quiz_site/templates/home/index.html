@@ -8,7 +8,8 @@
 		<div class="intro" ng-show="!inProgress">
 			OH HAI. WELCOME TO QUIZ. PRES TEH BUTN 2 START
 			<br>
-			<button id="start-button" class="btn btn-primary" ng-click="start()">START</button>
+<!-- 			<button id="start-button" class="btn btn-primary" ng-click="start()">START</button>
+ --> 			<button id="start-button" class="btn btn-primary" ng-click="testing()">START</button>
 		</div>
 
 		<!-- POST INTRO - inProgress = true-->
@@ -19,13 +20,14 @@
 			<!-- ACTUAL QUIZ - quizOver = false-->
 			<div ng-show="!quizOver">
 				<div class="question-text">
-					[[question]]
+					[[id + 1]]. [[question]]
 				</div>
 
 				<div ng-show="answerMode">
 					<div class="response-field">
 						<!-- <input id="search-field" type="text" ng-model="userAnswer"> -->
-						<angucomplete-alt id="search-field" selected-object="answerSelect" title-field="person" local-data="array_people" search-fields="person" minlength="1" match-class="highlight" />
+						<div angucomplete-alt id="search-field" selected-object="answerSelect" title-field="person" local-data="array_people" search-fields="person" minlength="1" match-class="highlight" />
+						</div>
 					</div>
 
 <!-- 					<button id="submit-button" class="btn btn-primary" ng-click="checkAnswer(userAnswer)">SUBMIT</button> -->
@@ -42,10 +44,30 @@
 				QUIZ DUN
 				<br>
 				Summary of Results:
-				<ol ng-repeat="item in jsonSummary">
-					<li>[[item.question]] - [[item.corrAnswer]] - [[item.usAnswer]]</li>
+				<ol>
+					<li ng-repeat="item in jsonSummary">[[item.question]] - [[item.corrAnswer]] - [[item.usAnswer]]</li>
 				</ol>
 				<button id="restart-button" class="btn btn-primary" ng-click="reset()">RETRY</button>
+
+				<div ng-show="!addQuotes">
+					<form name="userForm">
+						Add a quote!
+						<br>
+						Person:
+						<div angucomplete-alt placeholder="Ex: Tom Haverford" id="submit-person" selected-object="userPerson" title-field="person" local-data="array_people" search-fields="person" minlength="1" override-suggestions="true" match-class="highlight"/>
+						</div>
+						<br>
+						Quote: 
+						<br>
+						<textarea required ng-model="userQuote" placeholder="Insert quote here. No need to enclose with double quotes"></textarea>
+						<br>
+						[[userPerson.originalObject]] [[userQuote]] [[userQuote.$error]] [[userForm]]
+						<button class="btn btn-primary" ng-disabled="true" ng-click="userAdd()">Submit Quote</button>
+					</form>
+				</div>
+				<div ng-show="addQuotes">
+				QUOTE SUBMITTED
+				</div>
 			</div>
 		</div>
 	</div>

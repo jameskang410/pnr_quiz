@@ -82,17 +82,12 @@ app.controller('QuizController', ['$http','$scope', '$timeout', 'personRetriever
                 $scope.score = 0;
                 $scope.inProgress = true;
                 $scope.quizOver = false;
+                $scope.addQuotes = false;
                 //arrays to hold user answers
                 $scope.user_answer_array = [];
                 getQuestion();
             });
         });
-        // $scope.id = 0;
-        // $scope.score = 0;
-        // $scope.inProgress = true;
-        // $scope.quizOver = false;
-        // console.log($scope.id);
-        // console.log($scope.score);
     };  
 
     //grabbing a question
@@ -154,11 +149,12 @@ app.controller('QuizController', ['$http','$scope', '$timeout', 'personRetriever
 
         //selected-object of angulcomplete-alt calls the function with every letter inputted
         if (typeof selected !== "undefined") {
-            $scope.userAnswer = selected.title;
+            $scope.userAnswer = selected.originalObject["person"];
             checkAnswer();
         };
     };
 
+    //creating a summary in JSON (ex: questions, answers, user's answers)
     var createSummary = function() {
 
         $scope.jsonSummary = [];
@@ -176,10 +172,52 @@ app.controller('QuizController', ['$http','$scope', '$timeout', 'personRetriever
         console.log($scope.user_answer_array);
         console.log($scope.jsonSummary);
     };
+
+    //allows users to submit quotes
+    $scope.userAdd = function(){
+
+        $http.post("api/add/", {"person": $scope.userPerson.originalObject, "quote": $scope.userQuote}).
+            then(function(){
+            $scope.addQuotes = true;
+        });
+    };
+
     //testing
-    // $scope.update = function(){
-    //     console.log('TEST');
-    //     $scope.array_people = $scope.array_people;
-    // };
+    $scope.testing = function(){
+        $scope.score = 7;
+
+        $scope.jsonSummary = [
+                                {"question": "Question 1", "corrAnswer": "J", "usAnswer": "J"},
+                                {"question": "Question 2", "corrAnswer": "J" , "usAnswer": "J"},
+                                {"question": "Question 3", "corrAnswer": "J" , "usAnswer": "J"},
+                                {"question": "Question 4", "corrAnswer": "J" , "usAnswer": "J"},
+                                {"question": "Question 5", "corrAnswer": "J" , "usAnswer": "J"},
+                                {"question": "Question 6", "corrAnswer": "J" , "usAnswer": "J"},
+                                {"question": "Question 7", "corrAnswer": "J" , "usAnswer": "J"},
+                                {"question": "Question 8", "corrAnswer": "J" , "usAnswer": "J"},
+                                {"question": "Question 9", "corrAnswer": "J" , "usAnswer": "J"},
+                                {"question": "Question 10", "corrAnswer": "J" , "usAnswer": "J"},
+                            ];
+        $scope.array_people = [
+                                {"person":"Andy Dwyer"},
+                                {"person":"Ann Perkins"},
+                                {"person":"April Ludgate"},
+                                {"person":"Ben Wyatt"},
+                                {"person":"Chris Traeger"},
+                                {"person":"Garth Blundin"},
+                                {"person":"Harris Wittels"},
+                                {"person":"Jean-Ralphio Saperstein"},
+                                {"person":"Jeremy Jamm"},
+                                {"person":"Jerry Gergich"},
+                                {"person":"Leslie Knope"},
+                                {"person":"Mark Brendanawicz"},
+                                {"person":"Mona-Lisa Saperstein"},
+                                {"person":"Ron Swanson"},
+                                {"person":"Tom Haverford"}
+                            ];
+        $scope.inProgress = true;
+        $scope.quizOver = true;
+        $scope.addQuotes = false;
+    };
 
 }]);
