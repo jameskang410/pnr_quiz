@@ -54,15 +54,17 @@
 						Add a quote!
 						<br>
 						Person:
-						<div angucomplete-alt placeholder="Ex: Tom Haverford" id="submit-person" selected-object="userPerson" title-field="person" local-data="array_people" search-fields="person" minlength="1" override-suggestions="true" match-class="highlight"/>
-						</div>
+						<select>
+							<option ng-repeat="person in array_people" ng-model="userPerson" value="[[person.person]]">[[person.person]]</option>
+							[[userPerson]]
+						</select>
 						<br>
 						Quote: 
 						<br>
-						<textarea required ng-model="userQuote" placeholder="Insert quote here. No need to enclose with double quotes"></textarea>
+						<textarea ng-required="true" ng-model="userQuote" placeholder="Insert quote here. No need to enclose with double quotes" ng-minlength="5"></textarea>
+						<p ng-show="userQuote.length < 4" class="help-block">Quote is required and must be longer than 4 characters</p>
 						<br>
-						[[userPerson.originalObject]] [[userQuote]] [[userQuote.$error]] [[userForm]]
-						<button class="btn btn-primary" ng-disabled="true" ng-click="userAdd()">Submit Quote</button>
+						<button class="btn btn-primary" ng-disabled="userForm.$invalid" ng-click="userAdd()">Submit Quote</button>
 					</form>
 				</div>
 				<div ng-show="addQuotes">

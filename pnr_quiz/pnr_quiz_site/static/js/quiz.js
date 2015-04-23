@@ -53,7 +53,9 @@ app.factory('questionRetriever', function ($http, $q) {
 
 app.controller('QuizController', ['$http','$scope', '$timeout', 'personRetriever', 'questionRetriever', 'cfpLoadingBar', 
                                 function($http, $scope, $timeout, personRetriever, questionRetriever, cfpLoadingBar) {
-
+    //setting up variables for summary page
+    $scope.userQuote = "";
+    
     //set focus on input field if it's not hidden
     var setFocus = function(searchField) {
         $timeout(function() {
