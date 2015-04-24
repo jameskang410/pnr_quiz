@@ -74,6 +74,9 @@ app.controller('QuizController', ['$http','$scope', '$timeout', 'personRetriever
         gettingPersons
         .then(function(data){
             $scope.array_people = data;
+            //need to set this early for the dropdown menu later
+            $scope.userPerson  = $scope.array_people[0]['person'];
+            console.log($scope.userPerson);
         })
         .then(function(data){
             gettingQuestions
@@ -178,10 +181,18 @@ app.controller('QuizController', ['$http','$scope', '$timeout', 'personRetriever
     //allows users to submit quotes
     $scope.userAdd = function(){
 
-        $http.post("api/add/", {"person": $scope.userPerson.originalObject, "quote": $scope.userQuote}).
-            then(function(){
-            $scope.addQuotes = true;
-        });
+        $http.post("api/add/", {"person": $scope.userPerson, "quote": $scope.userQuote}).
+            success(function(){
+                $scope.addQuotes = true;
+                //clearing text
+                document.getElementById('user-text-area').value = "";
+                $scope.userQuote = "";
+                $scope.userPerson  = $scope.array_people[0]['person'];
+
+            }).
+            error(function(){
+                alert("Server is busy. Please try submitting the quote again!");
+            });
     };
 
     //testing
@@ -217,6 +228,7 @@ app.controller('QuizController', ['$http','$scope', '$timeout', 'personRetriever
                                 {"person":"Ron Swanson"},
                                 {"person":"Tom Haverford"}
                             ];
+
         $scope.inProgress = true;
         $scope.quizOver = true;
         $scope.addQuotes = false;
