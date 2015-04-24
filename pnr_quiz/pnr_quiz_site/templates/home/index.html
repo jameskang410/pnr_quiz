@@ -3,6 +3,33 @@
 {% csrf_token %}
 
 {% block content %}
+    <script>
+      window.fbAsyncInit = function() {
+        FB.init({
+          appId      : '359686774227548',
+          xfbml      : true,
+          status	 : true,
+          version    : 'v2.3'
+        });
+      };
+
+      (function(d, s, id){
+         var js, fjs = d.getElementsByTagName(s)[0];
+         if (d.getElementById(id)) {return;}
+         js = d.createElement(s); js.id = id;
+         js.src = "//connect.facebook.net/en_US/sdk.js";
+         fjs.parentNode.insertBefore(js, fjs);
+       }(document, 'script', 'facebook-jssdk'));
+    </script>
+
+
+
+<script src="view-source:http:/connect.facebook.net/en_US/all.js" type="text/javascript"></script> 
+	<script type="text/javascript"></script> 
+
+
+
+
 	<div class="container">
 		<!-- INTRO - BEFORE QUIZ - inProgress = false-->
 		<div class="intro" ng-show="!inProgress">
@@ -46,6 +73,8 @@
 				</ol>
 				<button id="restart-button" class="btn btn-primary" ng-click="reset()">RETRY</button>
 
+				<button id="facebook-button" class="btn btn-primary" ng-click="postFacebook()">Share your results on Facebook!</button>
+
 				<div ng-show="!addQuotes">
 						Add a quote!
 						<br>
@@ -56,10 +85,10 @@
 					<form name="form">
 						Quote: 
 						<br>
-						<textarea id="user-text-area" required name="userQuoteInput" ng-model="userQuote" placeholder="Insert quote here. No need to enclose with double quotes" /></textarea>
-						<p ng-show="form.userQuoteInput.$error.required && form.userQuoteInput.$dirty" class="help-block">Quote is required</p>
+						<textarea id="user-text-area" required name="userQuoteInput" ng-minlength="4" ng-model="userQuote" placeholder="Insert quote here. No need to enclose with double quotes" /></textarea> [[ 160 - userQuote.length ]]
+						<p ng-show="(form.userQuoteInput.$error.required || form.userQuoteInput.$error.minlength || userQuote.length > 160) && form.userQuoteInput.$dirty" class="help-block">Quote must be between 4 and 160 characters</p>
 						<br>
-						<button class="btn btn-primary" ng-disabled="form.userQuoteInput.$error.required" ng-click="userAdd()">Submit Quote</button>
+						<button class="btn btn-primary" ng-disabled="form.userQuoteInput.$error.required || form.userQuoteInput.$error.minlength || userQuote.length > 160" ng-click="userAdd()">Submit Quote</button>
 					</form>
 				</div>
 				<div ng-show="addQuotes">

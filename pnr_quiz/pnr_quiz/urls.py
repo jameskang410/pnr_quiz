@@ -14,8 +14,7 @@ urlpatterns = patterns('',
     url(r'^home/', 'pnr_quiz_site.views.home', name='home'),
 
     # API links
-    # view individual quote/row
-    url(r'^api/list/(?P<quotes_key>\d+)/$', views.QuotesDetail.as_view(), name='quotes_detail'),
+    
     # view all quotes/rows
     url(r'^api/list/$', views.QuotesList.as_view(), name='quotes_list'),
     # post new quote

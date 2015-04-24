@@ -195,6 +195,24 @@ app.controller('QuizController', ['$http','$scope', '$timeout', 'personRetriever
             });
     };
 
+    //share on Facebook
+    $scope.postFacebook = function() {
+
+        var message = "I got a " + $scope.score + "/10 on the Parks and Rec Quiz!";
+
+        FB.ui(
+            {
+             method: 'feed',
+             name: message,
+             link: 'http://www.tomatoflix.com',
+             picture: 'http://fbrell.com/f8.jpg',
+             caption: '',
+             description: 'Test how well YOU know your favorite Parks and Rec characters',
+            }, 
+            function(response){});
+
+    };
+
     //testing
     $scope.testing = function(){
         $scope.score = 7;

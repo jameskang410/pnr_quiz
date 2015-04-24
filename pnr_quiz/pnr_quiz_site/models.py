@@ -29,11 +29,17 @@ class PnrQuotes(models.Model):
     
     def format_quote(self):
         """
+        Strips quote
         Capitalizes quote
         Returns quote with ellipsis at the beginning and end of quotes
         """
+        import re
+
+        #strip white space
+        self.quote = self.quote.strip()
+
         #capitalize first letter of string
-        self.quote = self.quote.capitalize()
+        self.quote = self.quote[0].upper() + self.quote[1:]
 
         # if quote ends with period
         if self.quote.endswith("."):
