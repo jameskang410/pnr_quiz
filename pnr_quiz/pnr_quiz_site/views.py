@@ -57,19 +57,22 @@ class QuotesAdd(generics.CreateAPIView):
             #if the length is 160 or less
             if len(quote) < 161:
 
+                print('success!')
                 serializer.save(person=person, quote=quote)
 
                 #email notification
-                email_message = 'The following quote was added:\nPerson: %s\nQuote: %s' % (person, quote)
-                send_mail(subject='Quote Added', message=email_message, from_email='parksandrecquiz@gmail.com', recipient_list=['jameskang410@gmail.com'], 
-                            fail_silently=False)
+                email_message = 'The following quote was added:\n\n\nPerson: %s\nQuote: %s' % (person, quote)
+                send_mail('QUOTE WAS ADDED',  email_message, 'parksandrecquiz@gmail.com', ['jameskang410@gmail.com'], fail_silently=False)
 
+            else:
 
+                email_message = 'The following quote was NOT added:\n\n\nPerson: %s\nQuote: %s' % (person, quote)
+                send_mail('QUOTE WAS NOT ADDED',  email_message, 'parksandrecquiz@gmail.com', ['jameskang410@gmail.com'], fail_silently=False)
 
+        except Exception as e:
 
-        except:
-
-            pass
+            email_message = 'There was an error with submission. Details below:\n\nPerson: %s\nQuote: %s\n\nError: %s' % (person, quote, e)
+            send_mail('ERROR WITH SUBMISSION OF QUOTE',  email_message, 'parksandrecquiz@gmail.com', ['jameskang410@gmail.com'], fail_silently=False)            
 
 def home(request):
     """
