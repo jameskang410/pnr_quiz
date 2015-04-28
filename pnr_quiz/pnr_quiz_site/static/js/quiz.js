@@ -76,7 +76,7 @@ app.controller('QuizController', ['$http','$scope', '$timeout', 'personRetriever
             $scope.array_people = data;
             //need to set this early for the dropdown menu later
             $scope.userPerson  = $scope.array_people[0]['person'];
-            console.log($scope.userPerson);
+            // console.log($scope.userPerson);
         })
         .then(function(data){
             gettingQuestions
@@ -125,9 +125,9 @@ app.controller('QuizController', ['$http','$scope', '$timeout', 'personRetriever
         }
 
         else {
-            console.log('Boo');
-            console.log($scope.userAnswer);
-            console.log($scope.correct_answer);
+            // console.log('Boo');
+            // console.log($scope.userAnswer);
+            // console.log($scope.correct_answer);
             $scope.correctAnswer = false;
         }
 
@@ -173,9 +173,9 @@ app.controller('QuizController', ['$http','$scope', '$timeout', 'personRetriever
             });
         };
 
-        console.log($scope.questions_json);
-        console.log($scope.user_answer_array);
-        console.log($scope.jsonSummary);
+        // console.log($scope.questions_json);
+        // console.log($scope.user_answer_array);
+        // console.log($scope.jsonSummary);
     };
 
     //allows users to submit quotes
@@ -207,10 +207,9 @@ app.controller('QuizController', ['$http','$scope', '$timeout', 'personRetriever
              link: 'http://www.tomatoflix.com',
              picture: 'http://fbrell.com/f8.jpg',
              caption: '',
-             description: 'Test how well YOU know your favorite Parks and Rec characters',
+             description: 'Test how well YOU know your favorite Parks and Rec characters.',
             }, 
-            function(response){});
-
+            function(){});
     };
 
     //testing

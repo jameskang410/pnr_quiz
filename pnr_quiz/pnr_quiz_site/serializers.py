@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from pnr_quiz_site.models import PnrQuotes
+from pnr_quiz_site.models import PnrQuotes, PnrQuotesUser
 
 class PnrQuotesSerializer(serializers.ModelSerializer):
 
@@ -10,11 +10,9 @@ class PnrQuotesSerializer(serializers.ModelSerializer):
 class CreatePnrQuotesSerializer(serializers.ModelSerializer):
     """
     This serializer allows users to add quotes to the database.
-    It therefore uses the quote field instead of the format_quote 
-    field.
-    It also does not include the quotes_key PK field because by 
+    It does not include the quotes_key PK field because by 
     omitting it, it'll auto-increment
     """
     class Meta:
-        model = PnrQuotes
+        model = PnrQuotesUser
         fields = ('person', 'quote',)

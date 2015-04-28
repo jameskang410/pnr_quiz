@@ -1,7 +1,7 @@
 from django.shortcuts import render
 
 from rest_framework import generics
-from pnr_quiz_site.models import PnrQuotes
+from pnr_quiz_site.models import PnrQuotes, PnrQuotesUser
 from pnr_quiz_site.serializers import PnrQuotesSerializer, CreatePnrQuotesSerializer
 
 from django.core.mail import send_mail
@@ -39,7 +39,7 @@ class QuotesAdd(generics.CreateAPIView):
     """
     Add new quotes for API
     """
-    model = PnrQuotes
+    model = PnrQuotesUser
     serializer_class = CreatePnrQuotesSerializer
 
     # changing up the save method to do some validations on the data
