@@ -1,0 +1,92 @@
+/* Bolding the search matches */
+.highlight {
+  font-weight: bold;
+}
+
+/* Creating a scrolling option for dropdown */
+.angucomplete-dropdown {
+    overflow-y: auto;
+    max-height: 200px; // your preference
+}
+
+.header {
+	padding-bottom: 20px;
+	margin-bottom: 40px;
+}
+
+/* logo size */
+#logo {
+	height: 20%;
+	width: 50%;
+}
+
+/* Tightening the container */
+.container {
+	margin-left: 60px;
+	margin-right: 60px;
+	padding-left: 100px;
+	padding-right: 100px;
+}
+
+/* making quiz area more distinct */
+.quiz-div {
+	padding-top: 20px;
+}
+
+/* Making buttons larger */
+.btn-lg {
+	font-size: 2em;
+	padding: 18px 28px;
+}
+
+/* creating some room around the question */
+.question-text {
+	padding-top: 20px;
+}
+
+#specific-question {
+	font-family: 'Droid Sans', sans-serif;
+	font-size: 3em;
+}
+
+/* Changes location of the div containing angucomplete */
+.response-field {
+	padding-top: 50px;
+	width: 50%;
+	margin: 0 auto;
+}
+
+/* Changes the actual box 
+   Width of this element and angucomplete-dropdown need to match
+*/
+#search-field_value {
+	width: 500px;
+	font-family: 'Droid Sans', sans-serif;
+	font-size: 2em;
+	text-align: center;
+}
+
+/* Changes the actual drop-down */
+.angucomplete-dropdown {
+    width: 500px;
+    top: 55px;
+    font-family: 'Droid Sans', sans-serif;
+    font-size: 1.5em;
+    text-align: center;
+}
+
+/* Enlarging glyphicons */
+.glyphicon {
+	font-size: 400%;
+}
+/* Centering answers - check sign, incorrect sign */
+.centering-icons {
+	padding-top: 50px;
+	width: 20%;
+	margin: 0 auto;
+}
+
+#score {
+	width: 50%;
+	margin: 0 auto;
+}
