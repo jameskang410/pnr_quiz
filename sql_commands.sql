@@ -23,3 +23,14 @@ DELETE FROM pnr.pnr_quotes_user WHERE quotes_key = 2;
 
 ALTER TABLE pnr.pnr_quotes_user DROP COLUMN quotes_key;
 ALTER TABLE pnr.pnr_quotes_user ADD COLUMN quotes_key serial NOT NULL PRIMARY KEY;
+
+
+
+
+
+
+
+
+
+--ADDS USERS' QUOTES INTO ACTUAL QUIZ
+INSERT INTO pnr.pnr_quotes SELECT * FROM pnr.pnr_quotes_user

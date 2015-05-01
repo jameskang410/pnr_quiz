@@ -82,7 +82,7 @@ app.controller('QuizController', ['$http','$scope', '$timeout', 'personRetriever
             gettingQuestions
             .then(function(data){
                 $scope.questions_json = data;
-                // console.log($scope.questions_json);
+                console.log($scope.questions_json);
                 $scope.id = 0;
                 $scope.score = 0;
                 $scope.inProgress = true;
@@ -122,6 +122,7 @@ app.controller('QuizController', ['$http','$scope', '$timeout', 'personRetriever
             console.log('Hurray');
             $scope.score++;
             $scope.correctAnswer = true;
+            setFocus(document.getElementById('next-question-button-correct'));
         }
 
         else {
@@ -129,10 +130,11 @@ app.controller('QuizController', ['$http','$scope', '$timeout', 'personRetriever
             // console.log($scope.userAnswer);
             // console.log($scope.correct_answer);
             $scope.correctAnswer = false;
+            setFocus(document.getElementById('next-question-button-incorrect'));
+
         }
 
         $scope.answerMode = false;
-        setFocus(document.getElementById('next-question-button'));
 
     };
 
@@ -216,6 +218,11 @@ app.controller('QuizController', ['$http','$scope', '$timeout', 'personRetriever
     $scope.testing = function(){
         $scope.score = 7;
 
+        $scope.questions_json = [
+        {format_quote: "...Time is money, money is power, power is pizza, and pizza is knowledge...",
+        person: "April Ludgate",
+        quotes_key: 19},
+                            ];
         $scope.jsonSummary = [
                                 {"question": "Question 1", "corrAnswer": "J", "usAnswer": "J"},
                                 {"question": "Question 2", "corrAnswer": "J" , "usAnswer": "J"},
@@ -245,10 +252,15 @@ app.controller('QuizController', ['$http','$scope', '$timeout', 'personRetriever
                                 {"person":"Ron Swanson"},
                                 {"person":"Tom Haverford"}
                             ];
+                $scope.id = 0;
+                $scope.score = 0;
+                $scope.inProgress = true;
+                $scope.quizOver = false;
+                $scope.addQuotes = false;
+                //arrays to hold user answers
+                $scope.user_answer_array = [];
+                getQuestion();
 
-        $scope.inProgress = true;
-        $scope.quizOver = true;
-        $scope.addQuotes = false;
     };
 
 }]);

@@ -47,3 +47,7 @@ def insert_quote(character, quote):
 # insert_quote('Andy Dwyer', "Technically we're all dying unless you choose the right grail. It's the dusty one.")
 # insert_quote('Ron Swanson',"Well, cheer up. You've got a new job, new challenges. All that crap you like.")
 # insert_quote('Mark Brendanawicz', "Is it likely? No. It's not likely, you know. But is it possible? No. It's not possible. I would give up on that one.")
+# insert_quote('Dave Sanderson', "He's probably gonna go anger pee in the courtyard")
+# insert_quote('Leslie Knope', "What if I get drunk and talk about Darfur too much? Or not enough?")
+# insert_quote('Leslie Knope', 'This gun truly symbolizes the blossoming peace between our two nations')
+

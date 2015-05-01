@@ -22,32 +22,34 @@
        }(document, 'script', 'facebook-jssdk'));
     </script>
 
-
-
-<script src="view-source:http:/connect.facebook.net/en_US/all.js" type="text/javascript"></script> 
-	<script type="text/javascript"></script> 
-
-
-
-
 	<div class="container">
-		<!-- INTRO - BEFORE QUIZ - inProgress = false-->
-		<div class="intro" ng-show="!inProgress">
-			OH HAI. WELCOME TO QUIZ. PRES TEH BUTN 2 START
-			<br>
-<!-- 			<button id="start-button" class="btn btn-primary" ng-click="start()">START</button>
- --> 			<button id="start-button" class="btn btn-primary" ng-click="testing()">START</button>
+
+		<div class="header">
+			<img id="logo" src="{% static 'img/parks_and_rec_logo.png' %}" class="center-block">
 		</div>
+
+
+		<!-- INTRO - BEFORE QUIZ - inProgress = false-->
+		<div class="quiz-div" ng-show="!inProgress">
+			<div class="row">
+				<div class="col-md-8 col-md-offset-2">
+				<h1 class="text-center">Test how well you know your favorite Parks and Rec characters!</h1>
+				</div>
+			</div>
+			<br><br><br><br><br>
+<!-- 			<button id="start-button" class="btn btn-success btn-lg center-block" ng-click="start()">START THE QUIZ</button>
+ -->			<button id="start-button" class="btn btn-success btn-lg center-block" ng-click="testing()">TESTING</button>
+	</div>
 
 		<!-- POST INTRO - inProgress = true-->
 		<div class="quizzing" ng-show="inProgress">
 			<div id="score">
-				DIS SCORE: [[score]]/10 
+				<h3 class="text-center">Your Score: [[score]]/10</h3>
 			</div>
 			<!-- ACTUAL QUIZ - quizOver = false-->
 			<div ng-show="!quizOver">
 				<div class="question-text">
-					[[id + 1]]. [[question]]
+					<h2 id="specific-question" class="text-center">[[id + 1]]. "[[question]]"</h2>
 				</div>
 
 				<div ng-show="answerMode">
@@ -57,10 +59,17 @@
 					</div>
 				</div>
 
-				<div ng-show="!answerMode">
-					<button id="next-question-button" class="btn btn-primary" ng-click="nextQuestion()">Next</button>
-					<span ng-show="correctAnswer">Correct!</span>
-					<span ng-show="!correctAnswer">Wrong!</span>
+				<div ng-show="!answerMode" class="centering-icons">
+					<div ng-show="correctAnswer">
+							<button id="next-question-button-correct" class="btn btn-success btn-lg center-block" ng-click="nextQuestion()">
+							Correct!
+							</button>
+					</div>
+					<div ng-show="!correctAnswer">
+						<button id="next-question-button-incorrect" class="btn btn-danger btn-lg center-block" ng-click="nextQuestion()">
+						Incorrect!
+						</button>
+					</div>
 				</div>
 			</div>
 			<!-- QUIZ IS COMPLETE - quizOver = true-->
