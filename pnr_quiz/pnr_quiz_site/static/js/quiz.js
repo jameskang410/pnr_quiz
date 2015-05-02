@@ -55,7 +55,7 @@ app.controller('QuizController', ['$http','$scope', '$timeout', 'personRetriever
                                 function($http, $scope, $timeout, personRetriever, questionRetriever, cfpLoadingBar) {
     //setting up variables for summary page
     $scope.userQuote = "";
-    
+
     //set focus on input field if it's not hidden
     var setFocus = function(searchField) {
         $timeout(function() {
@@ -224,16 +224,16 @@ app.controller('QuizController', ['$http','$scope', '$timeout', 'personRetriever
         quotes_key: 19},
                             ];
         $scope.jsonSummary = [
-                                {"question": "Question 1", "corrAnswer": "J", "usAnswer": "J"},
-                                {"question": "Question 2", "corrAnswer": "J" , "usAnswer": "J"},
-                                {"question": "Question 3", "corrAnswer": "J" , "usAnswer": "J"},
-                                {"question": "Question 4", "corrAnswer": "J" , "usAnswer": "J"},
-                                {"question": "Question 5", "corrAnswer": "J" , "usAnswer": "J"},
-                                {"question": "Question 6", "corrAnswer": "J" , "usAnswer": "J"},
-                                {"question": "Question 7", "corrAnswer": "J" , "usAnswer": "J"},
-                                {"question": "Question 8", "corrAnswer": "J" , "usAnswer": "J"},
-                                {"question": "Question 9", "corrAnswer": "J" , "usAnswer": "J"},
-                                {"question": "Question 10", "corrAnswer": "J" , "usAnswer": "J"},
+                                {"question": "...Boring is my middle name...", "corrAnswer": "Leslie Knope", "usAnswer": "Leslie Knope"},
+                                {"question": "...All my favorite foods have butter on them; pancakes, toast, popcorn, grapes -- Oh! Butter is my favorite food!...", "corrAnswer": "Leslie Knope" , "usAnswer": "Chris Traeger"},
+                                {"question": "...Time is money, money is power, power is pizza, and pizza is knowledge...", "corrAnswer": "April Ludgate" , "usAnswer": "April Ludgate"},
+                                {"question": "...What if I get drunk and talk about Darfur too much? Or not enough?...", "corrAnswer": "Leslie Knope" , "usAnswer": "Leslie Knope"},
+                                {"question": "...What if I get drunk and talk about Darfur too much? Or not enough?...", "corrAnswer": "Leslie Knope" , "usAnswer": "Leslie Knope"},
+                                {"question": "...What if I get drunk and talk about Darfur too much? Or not enough?...", "corrAnswer": "Leslie Knope" , "usAnswer": "Leslie Knope"},
+                                {"question": "...What if I get drunk and talk about Darfur too much? Or not enough?...", "corrAnswer": "Leslie Knope" , "usAnswer": "Leslie Knope"},
+                                {"question": "...What if I get drunk and talk about Darfur too much? Or not enough?...", "corrAnswer": "Leslie Knope" , "usAnswer": "Leslie Knope"},
+                                {"question": "...What if I get drunk and talk about Darfur too much? Or not enough?...", "corrAnswer": "Leslie Knope" , "usAnswer": "Leslie Knope"},
+                                {"question": "...What if I get drunk and talk about Darfur too much? Or not enough?...", "corrAnswer": "Leslie Knope" , "usAnswer": "Andy Dwyer"},
                             ];
         $scope.array_people = [
                                 {"person":"Andy Dwyer"},
@@ -253,10 +253,9 @@ app.controller('QuizController', ['$http','$scope', '$timeout', 'personRetriever
                                 {"person":"Tom Haverford"}
                             ];
                 $scope.id = 0;
-                $scope.score = 0;
+                $scope.score = 8;
+                $scope.quizOver = true;
                 $scope.inProgress = true;
-                $scope.quizOver = false;
-                $scope.addQuotes = false;
                 //arrays to hold user answers
                 $scope.user_answer_array = [];
                 getQuestion();

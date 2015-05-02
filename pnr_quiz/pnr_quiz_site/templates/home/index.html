@@ -37,9 +37,9 @@
 				</div>
 			</div>
 			<br><br><br><br><br>
-<!-- 			<button id="start-button" class="btn btn-success btn-lg center-block" ng-click="start()">START THE QUIZ</button>
- -->			<button id="start-button" class="btn btn-success btn-lg center-block" ng-click="testing()">TESTING</button>
-	</div>
+			<button id="start-button" class="btn btn-success btn-lg center-block" ng-click="start()">START THE QUIZ</button>
+<!-- 			<button id="start-button" class="btn btn-success btn-lg center-block" ng-click="testing()">TESTING</button>
+ -->		</div>
 
 		<!-- POST INTRO - inProgress = true-->
 		<div class="quizzing" ng-show="inProgress">
@@ -74,34 +74,64 @@
 			</div>
 			<!-- QUIZ IS COMPLETE - quizOver = true-->
 			<div ng-show="quizOver">
-				QUIZ DUN
-				<br>
-				Summary of Results:
-				<ol>
-					<li ng-repeat="item in jsonSummary">[[item.question]] - [[item.corrAnswer]] - [[item.usAnswer]]</li>
-				</ol>
-				<button id="restart-button" class="btn btn-primary" ng-click="reset()">RETRY</button>
-
-				<button id="facebook-button" class="btn btn-primary" ng-click="postFacebook()">Share your results on Facebook!</button>
-
-				<div ng-show="!addQuotes">
-						Add a quote!
-						<br>
-						Person:
- 							<select ng-model="userPerson" ng-init="userPerson = userPerson" ng-options="person.person as person.person for person in array_people">
- 							</select>
-						<br>
-					<form name="form">
-						Quote: 
-						<br>
-						<textarea id="user-text-area" required name="userQuoteInput" ng-minlength="4" ng-model="userQuote" placeholder="Insert quote here. No need to enclose with double quotes" /></textarea> [[ 160 - userQuote.length ]]
-						<p ng-show="(form.userQuoteInput.$error.required || form.userQuoteInput.$error.minlength || userQuote.length > 160) && form.userQuoteInput.$dirty" class="help-block">Quote must be between 4 and 160 characters</p>
-						<br>
-						<button class="btn btn-primary" ng-disabled="form.userQuoteInput.$error.required || form.userQuoteInput.$error.minlength || userQuote.length > 160" ng-click="userAdd()">Submit Quote</button>
-					</form>
+				<div class="quiz-summary">
+					<h3>Summary of Results:</h3>
+					<br>
+					<ol class="questions-list" ng-repeat="item in jsonSummary">
+						<blockquote>
+							<p>[[$index + 1]]. "[[item.question]]" </p>
+							<footer class="footer-size">
+								<span style="color:green" ng-if="item.usAnswer == item.corrAnswer">
+									[[item.corrAnswer]]
+								</span>
+								<span ng-if="item.usAnswer != item.corrAnswer">
+									<span style="color:red">
+										<s>[[item.usAnswer]]</s>
+										<span style="color:green">
+											[[item.corrAnswer]]
+										</span>
+									</span>
+								</span>
+							</footer>
+						</blockquote>
+					</ol>
 				</div>
-				<div ng-show="addQuotes">
-				QUOTE SUBMITTED
+				<div class="restart-share">
+					<span class="restart-button-padding">
+						<button id="restart-button" class="btn btn-primary btn-lg center-block" ng-click="reset()">Take the Quiz Again!</button>
+					</span>
+					<br>
+				<button id="facebook-button" class="btn btn-primary center-block" ng-click="postFacebook()"><img src="{% static 'img/facebook_logo.png' %}">Share your results on Facebook!</button>
+				</div>
+
+				<div class="add-quotes">
+				<h3>Didn't see your favorite Parks and Rec quote? Add it yourself!</h3>
+					<div ng-show="!addQuotes">
+						<br>
+						<form name="form" class="form padding-left-50 padding-down">
+							<div class="form-group">
+								<h4>Person</h4>
+	 							<select class="form-control" ng-model="userPerson" ng-init="userPerson = userPerson" ng-options="person.person as person.person for person in array_people">
+	 							</select>
+							</div>
+
+							<div class="form-group">
+								<h4>Quote</h4>
+								<textarea class="form-control" id="user-text-area" required name="userQuoteInput" ng-minlength="4" ng-model="userQuote" placeholder="Insert quote here. No need to enclose with quotation marks." /></textarea>
+								<label>[[ 160 - form.userQuoteInput.$viewValue.length ]]</label>
+								<p ng-show="(form.userQuoteInput.$error.required || form.userQuoteInput.$error.minlength || userQuote.length > 160) && form.userQuoteInput.$dirty" class="help-block">Quote must be between 4 and 160 characters</p>
+							</div>
+							<button class="btn btn-primary" ng-disabled="form.userQuoteInput.$error.required || form.userQuoteInput.$error.minlength || userQuote.length > 160" ng-click="userAdd()">Submit Quote</button>
+						</form>
+					</div>
+					<div ng-show="addQuotes" class="form thank-you-submission padding-down">
+					<br>
+					<span style="color:green">
+						<i class="glyphicon glyphicon-check"></i>
+						<label>Quote was successfully submitted! Thanks!</label>
+					</span>
+					<br><br><br><br><br>
+					</div>
 				</div>
 			</div>
 		</div>
