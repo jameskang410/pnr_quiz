@@ -1,8 +1,18 @@
+/* Making sure that footer sticks to bottom */
+html {
+  position: relative;
+  min-height: 100%;
+}
+body {
+  margin-bottom: 30px;
+}
 /* Footer */
 #footer-info {
     position: absolute;
     bottom: 0;
+    margin-top: 20px;
     left: 45%;
+    height: 30px;
 }
 
 /* Bolding the search matches */
@@ -10,10 +20,12 @@
   font-weight: bold;
 }
 
-/* Creating a scrolling option for dropdown */
+/* Creating a scrolling option for dropdown 
+   Change max-height to adjust size of dropdown
+*/
 .angucomplete-dropdown {
     overflow-y: auto;
-    max-height: 200px; // your preference
+    max-height: 140px;
 }
 
 .header {
@@ -124,7 +136,7 @@
 	padding-top: 20px;
 }
 
-/* Messing with the footer's size */
+/* Messing with the blockquote's footer size */
 .footer-size {
 	font-size: .9em;
 }

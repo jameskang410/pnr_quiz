@@ -50,4 +50,6 @@ def insert_quote(character, quote):
 # insert_quote('Dave Sanderson', "He's probably gonna go anger pee in the courtyard")
 # insert_quote('Leslie Knope', "What if I get drunk and talk about Darfur too much? Or not enough?")
 # insert_quote('Leslie Knope', 'This gun truly symbolizes the blossoming peace between our two nations')
-
+# insert_quote('Ron Swanson', "Give a man a fish and you feed him for a day. Don't teach a man to fish, and you feed yourself. He’s a grown man. Fishing's not that hard")
+# insert_quote('Perd Hapley',"There is such a thing called journalistic integrity. And it is something I have as a journalist with integrity")
+# insert_quote('Jean-Ralphio Saperstein', "I hope you brought a change of clothes because your eyes are about to piss tears")

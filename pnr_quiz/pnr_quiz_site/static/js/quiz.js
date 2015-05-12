@@ -82,7 +82,7 @@ app.controller('QuizController', ['$http','$scope', '$timeout', 'personRetriever
             gettingQuestions
             .then(function(data){
                 $scope.questions_json = data;
-                console.log($scope.questions_json);
+                // console.log($scope.questions_json);
                 $scope.id = 0;
                 $scope.score = 0;
                 $scope.inProgress = true;
@@ -119,7 +119,7 @@ app.controller('QuizController', ['$http','$scope', '$timeout', 'personRetriever
         $scope.user_answer_array.push($scope.userAnswer);
 
         if($scope.userAnswer == $scope.correct_answer) {
-            console.log('Hurray');
+            // console.log('Hurray');
             $scope.score++;
             $scope.correctAnswer = true;
             setFocus(document.getElementById('next-question-button-correct'));
