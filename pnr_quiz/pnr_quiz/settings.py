@@ -19,12 +19,12 @@ BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 # See https://docs.djangoproject.com/en/1.7/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '6!1azm5wu@i&33(@5v9ao5hsb7g1yq2^h_aa&0=2)p+%n-dc4+'
+SECRET_KEY = keyring.get_password('pnr_quiz', 'secret_key')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-TEMPLATE_DEBUG = True
+TEMPLATE_DEBUG = False
 
 ALLOWED_HOSTS = ["*"]
 
@@ -69,7 +69,7 @@ DATABASES = {
         'NAME': 'django',
         'USER': 'django',
         'PASSWORD': keyring.get_password('django_user','postgres'),
-        'HOST': '104.236.194.147',
+        'HOST': 'localhost',
         'PORT': '5432',
     }
 }
@@ -92,6 +92,9 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.7/howto/static-files/
 
 STATIC_URL = '/static/'
+
+# Setting up static root for collectstatic command
+STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
 
 # Email
 EMAIL_USE_TLS = True
