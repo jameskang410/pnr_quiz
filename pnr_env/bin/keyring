@@ -1,4 +1,4 @@
-#!/Users/mrbowow/Code/pnr_quiz/pnr_env/bin/python3.4
+#!/Users/jameskang/Code/pnr_quiz/pnr_env/bin/python3.4
 # EASY-INSTALL-ENTRY-SCRIPT: 'keyring==5.3','console_scripts','keyring'
 __requires__ = 'keyring==5.3'
 import sys
