@@ -1,0 +1,4 @@
+[2015-06-04 18:49:36 -0400] [19527] [INFO] Starting gunicorn 19.3.0
+[2015-06-04 18:49:36 -0400] [19527] [INFO] Listening at: http://127.0.0.1:8000 (19527)
+[2015-06-04 18:49:36 -0400] [19527] [INFO] Using worker: sync
+[2015-06-04 18:49:36 -0400] [19546] [INFO] Booting worker with pid: 19546
