@@ -3,3 +3,4 @@ __pycache__/
 
 pnr_env
 *.pyc
+logs/
