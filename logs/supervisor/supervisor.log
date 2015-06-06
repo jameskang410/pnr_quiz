@@ -2,3 +2,10 @@
 [2015-06-04 18:49:36 -0400] [19527] [INFO] Listening at: http://127.0.0.1:8000 (19527)
 [2015-06-04 18:49:36 -0400] [19527] [INFO] Using worker: sync
 [2015-06-04 18:49:36 -0400] [19546] [INFO] Booting worker with pid: 19546
+[2015-06-06 02:46:57 -0400] [19527] [INFO] Handling signal: term
+[2015-06-06 06:46:57 +0000] [19546] [INFO] Worker exiting (pid: 19546)
+[2015-06-06 02:46:57 -0400] [19527] [INFO] Shutting down: Master
+[2015-06-06 02:46:58 -0400] [16424] [INFO] Starting gunicorn 19.3.0
+[2015-06-06 02:46:58 -0400] [16424] [INFO] Listening at: http://127.0.0.1:8000 (16424)
+[2015-06-06 02:46:58 -0400] [16424] [INFO] Using worker: sync
+[2015-06-06 02:46:58 -0400] [16427] [INFO] Booting worker with pid: 16427

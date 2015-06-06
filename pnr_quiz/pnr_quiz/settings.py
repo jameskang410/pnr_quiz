@@ -102,3 +102,10 @@ EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_HOST_USER = 'parksandrecquiz@gmail.com'
 EMAIL_HOST_PASSWORD = 'TestPassword'
+
+# Trying to close off browsable API for prod
+REST_FRAMEWORK = {
+	'DEFAULT_RENDERER_CLASSES': (
+		'rest_framework.renderers.JSONRenderer',
+		)
+	}
