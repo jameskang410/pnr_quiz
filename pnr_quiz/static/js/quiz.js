@@ -206,7 +206,7 @@ app.controller('QuizController', ['$http','$scope', '$timeout', 'personRetriever
             {
              method: 'feed',
              name: message,
-             link: 'http://www.tomatoflix.com',
+             link: 'http://www.parksandrecquiz.com',
              picture: 'http://fbrell.com/f8.jpg',
              caption: '',
              description: 'Test how well YOU know your favorite Parks and Rec characters.',
