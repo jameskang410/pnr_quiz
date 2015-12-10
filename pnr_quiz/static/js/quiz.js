@@ -207,8 +207,8 @@ app.controller('QuizController', ['$http','$scope', '$timeout', 'personRetriever
              method: 'feed',
              name: message,
              link: 'http://www.parksandrecquiz.com',
-             picture: 'http://www.eonline.com/eol_images/Entire_Site/201407/rs_560x401-140107094334-1024.parks-rec-cast-010714.jpg',
-             caption: '',
+             picture: 'http://parksandrecquiz.com/static/img/facebook_pic.jpg',
+             caption: 'Parks and Rec Quotes Quiz',
              description: 'Test how well YOU know your favorite Parks and Rec characters.',
             }, 
             function(){});
