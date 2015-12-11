@@ -90,10 +90,16 @@ body {
     width: 500px;
     top: 55px;
     font-family: 'Droid Sans', sans-serif;
-    font-size: 1.5em;
+    font-size: 2em;
+    padding-left: 20px;
+    padding-right: 20px;
     text-align: center;
 }
 
+/* Changes individual rows in angucomplete-dropdown */
+.angucomplete-row {
+	height: 90px;
+}
 /* Enlarging glyphicons */
 .glyphicon {
 	font-size: 150%;
@@ -151,4 +157,9 @@ body {
 	width: 50%;
 	margin: 0 auto;
 	font-size: 1.5em;
+}
+
+.angucomplete-image {
+	height: 80px;
+	width: 80px;
 }

@@ -1,2 +1,3 @@
 pnr_env
 *.pyc
+.DS_Store

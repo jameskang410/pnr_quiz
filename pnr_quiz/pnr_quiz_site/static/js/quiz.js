@@ -73,7 +73,16 @@ app.controller('QuizController', ['$http','$scope', '$timeout', 'personRetriever
         //array_people is set, then questions_json is set, then the window loads and question is retrieved
         gettingPersons
         .then(function(data){
-            $scope.array_people = data;
+
+            $scope.array_people = [];
+
+            for (var i = 0; i < data.length; i++) {
+                $scope.array_people.push({
+                    'person' : data[i].person,
+                    'pic' : '/static/img/' + data[i].person.replace(/\s+/g, '') + '_thumbnail.png'
+                });
+            }
+
             //need to set this early for the dropdown menu later
             $scope.userPerson  = $scope.array_people[0]['person'];
             // console.log($scope.userPerson);
