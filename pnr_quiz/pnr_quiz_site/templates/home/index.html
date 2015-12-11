@@ -20,8 +20,8 @@
 			</div>
 			<br><br><br><br><br>
 			<button id="start-button" class="btn btn-success btn-lg center-block" ng-click="start()">START THE QUIZ</button>
-<!--  			<button id="start-button" class="btn btn-success btn-lg center-block" ng-click="testing()">TESTING</button> -->
-		</div>
+<!--  			<button id="start-button" class="btn btn-success btn-lg center-block" ng-click="testing()">TESTING</button>
+ -->		</div>
 
 		<!-- POST INTRO - inProgress = true -->
 		<div class="quizzing" ng-show="inProgress">
@@ -60,6 +60,7 @@
 					<div id="user-submit-form">
 						<div ng-show="!submitName">
 							<form name="userForm" class="form-inline">
+								{% csrf_token %}
 								<fieldset class="form-group">
 									<h5>Submit your name and score to see if you made it into the leaderboard</h5>
 									<input class="form-control" placeholder="First Last" ng-model="userName" required name="userName" ng-minlength="3" ng-maxlength="25">
