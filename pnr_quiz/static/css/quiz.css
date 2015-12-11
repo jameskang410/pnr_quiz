@@ -90,16 +90,24 @@ body {
     width: 500px;
     top: 55px;
     font-family: 'Droid Sans', sans-serif;
-    font-size: 2em;
+    font-size: 1.5em;
     padding-left: 20px;
     padding-right: 20px;
-    text-align: center;
+    /* adjust size of dropdown */
+    max-height: 250px;
 }
 
 /* Changes individual rows in angucomplete-dropdown */
 .angucomplete-row {
-	height: 90px;
+	height: 70px;
 }
+
+/* Changes text in individual rows in angucomplete-dropdown */
+.angucomplete-title {
+	padding-top: 15px;
+	text-align: center;
+}
+
 /* Enlarging glyphicons */
 .glyphicon {
 	font-size: 150%;
@@ -159,7 +167,41 @@ body {
 	font-size: 1.5em;
 }
 
+/* Actual pic for characters in dropdown */
 .angucomplete-image {
-	height: 80px;
-	width: 80px;
+	height: 60px;
+	width: 60px;
 }
+
+/* All stuff for the leader table */
+.leaders-board {
+	padding-top: 50px;
+}
+
+#leader-table-div {
+	padding-left: 250px;
+	padding-right: 250px;
+}
+
+#leader-table {
+	border: solid 1px lightgrey;
+}
+
+tr {
+	text-align: center;
+}
+
+th {
+	text-align: center;
+}
+
+#user-submit-form {
+	text-align: center;
+}
+
+#table-header {
+	text-align: center;
+	padding-bottom: 10px;
+}
+
+/* End stuff for the leader table */

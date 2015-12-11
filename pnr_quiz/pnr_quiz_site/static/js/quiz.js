@@ -53,13 +53,13 @@ app.factory('questionRetriever', function ($http, $q) {
 
 app.controller('QuizController', ['$http','$scope', '$timeout', 'personRetriever', 'questionRetriever', 'cfpLoadingBar', 
                                 function($http, $scope, $timeout, personRetriever, questionRetriever, cfpLoadingBar) {
+    
     //setting up variables for summary page
     $scope.userQuote = "";
 
     //set focus on input field if it's not hidden
     var setFocus = function(searchField) {
         $timeout(function() {
-        // console.log(searchField);
         searchField.focus();
         }, 0);
     };
@@ -85,13 +85,11 @@ app.controller('QuizController', ['$http','$scope', '$timeout', 'personRetriever
 
             //need to set this early for the dropdown menu later
             $scope.userPerson  = $scope.array_people[0]['person'];
-            // console.log($scope.userPerson);
         })
         .then(function(data){
             gettingQuestions
             .then(function(data){
                 $scope.questions_json = data;
-                // console.log($scope.questions_json);
                 $scope.id = 0;
                 $scope.score = 0;
                 $scope.inProgress = true;
@@ -114,7 +112,6 @@ app.controller('QuizController', ['$http','$scope', '$timeout', 'personRetriever
             $scope.correct_answer = $scope.row['person'];
             $scope.answerMode = true;
             setFocus(document.getElementById('search-field_value'));
-            // console.log($scope.array_people);
         }
         //if all questions have been answered - aka quiz is over
         else {
@@ -128,16 +125,12 @@ app.controller('QuizController', ['$http','$scope', '$timeout', 'personRetriever
         $scope.user_answer_array.push($scope.userAnswer);
 
         if($scope.userAnswer == $scope.correct_answer) {
-            // console.log('Hurray');
             $scope.score++;
             $scope.correctAnswer = true;
             setFocus(document.getElementById('next-question-button-correct'));
         }
 
         else {
-            // console.log('Boo');
-            // console.log($scope.userAnswer);
-            // console.log($scope.correct_answer);
             $scope.correctAnswer = false;
             setFocus(document.getElementById('next-question-button-incorrect'));
 
@@ -183,25 +176,21 @@ app.controller('QuizController', ['$http','$scope', '$timeout', 'personRetriever
                 usAnswer: $scope.user_answer_array[i]
             });
         };
-
-        // console.log($scope.questions_json);
-        // console.log($scope.user_answer_array);
-        // console.log($scope.jsonSummary);
     };
 
     //allows users to submit quotes
     $scope.userAdd = function(){
 
-        $http.post("api/add/", {"person": $scope.userPerson, "quote": $scope.userQuote}).
-            success(function(){
+        $http.post("api/add/", {"person": $scope.userPerson, "quote": $scope.userQuote})
+            .success(function(){
                 $scope.addQuotes = true;
                 //clearing text
                 document.getElementById('user-text-area').value = "";
                 $scope.userQuote = "";
                 $scope.userPerson  = $scope.array_people[0]['person'];
 
-            }).
-            error(function(){
+            })
+            .error(function(){
                 alert("Server is busy. Please try submitting the quote again!");
             });
     };
@@ -216,11 +205,26 @@ app.controller('QuizController', ['$http','$scope', '$timeout', 'personRetriever
              method: 'feed',
              name: message,
              link: 'http://www.parksandrecquiz.com',
-             picture: 'http://parksandrecquiz.com/static/img/facebook_pic.jpg',
-             caption: 'Parks and Rec Quotes Quiz',
+             picture: 'http://www.parksandrecquiz.com/static/img/facebook_pic.jpg',
+             caption: 'Parks and Rec Quiz!',
              description: 'Test how well YOU know your favorite Parks and Rec characters.',
             }, 
             function(){});
+    };
+
+    //when user submits score
+    $scope.submitScore = function(userName) {
+
+        var data = {"name": userName, "score": $scope.score};
+        
+        $http.post("submitscore/", data)
+            .success(function(response) {
+                createTable(response.leaders);
+                $scope.submitName = true;
+            })
+            .error(function(response) {
+                console.log(response);
+            });
     };
 
     //testing
@@ -272,3 +276,13 @@ app.controller('QuizController', ['$http','$scope', '$timeout', 'personRetriever
     };
 
 }]);
+
+//create HTML table of leaders - felt more comfortable using jQuery
+function createTable(leaders) {
+    html = [];
+    for (var i = leaders.length - 1; i >= 0; i--) {
+        html.push('<tr><td>' + leaders[i].user + '</td><td>' + leaders[i].score + '</td></tr>');
+    }
+
+    $("#user-scores").append(html.join(''));
+}

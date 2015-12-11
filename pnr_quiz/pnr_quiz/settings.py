@@ -96,13 +96,6 @@ STATIC_URL = '/static/'
 # Setting up static root for collectstatic command
 STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
 
-# Email
-EMAIL_USE_TLS = True
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_PORT = 587
-EMAIL_HOST_USER = 'parksandrecquiz@gmail.com'
-EMAIL_HOST_PASSWORD = 'TestPassword'
-
 # Trying to close off browsable API for prod
 REST_FRAMEWORK = {
 	'DEFAULT_RENDERER_CLASSES': (
