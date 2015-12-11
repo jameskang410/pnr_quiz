@@ -4,7 +4,14 @@ from rest_framework import generics
 from pnr_quiz_site.models import PnrQuotes, PnrQuotesUser
 from pnr_quiz_site.serializers import PnrQuotesSerializer, CreatePnrQuotesSerializer
 
-from django.core.mail import send_mail
+from django.http import JsonResponse
+import json
+
+import redis
+
+# used to make salt
+import random
+import string
 
 # Create your views here.
 
@@ -44,6 +51,7 @@ class QuotesAdd(generics.CreateAPIView):
 
     # changing up the save method to do some validations on the data
     def perform_create(self, serializer):
+        r = redis.StrictRedis()
 
         try:
             person = serializer.validated_data['person']
@@ -57,22 +65,20 @@ class QuotesAdd(generics.CreateAPIView):
             #if the length is 160 or less
             if len(quote) < 161:
 
-                print('success!')
+                #save to user db
                 serializer.save(person=person, quote=quote)
 
-                #email notification
                 email_message = 'The following quote was added:\n\n\nPerson: %s\nQuote: %s' % (person, quote)
-                send_mail('QUOTE WAS ADDED',  email_message, 'parksandrecquiz@gmail.com', ['jameskang410@gmail.com'], fail_silently=False)
 
             else:
-
                 email_message = 'The following quote was NOT added:\n\n\nPerson: %s\nQuote: %s' % (person, quote)
-                send_mail('QUOTE WAS NOT ADDED',  email_message, 'parksandrecquiz@gmail.com', ['jameskang410@gmail.com'], fail_silently=False)
 
         except Exception as e:
 
             email_message = 'There was an error with submission. Details below:\n\nPerson: %s\nQuote: %s\n\nError: %s' % (person, quote, e)
-            send_mail('ERROR WITH SUBMISSION OF QUOTE',  email_message, 'parksandrecquiz@gmail.com', ['jameskang410@gmail.com'], fail_silently=False)            
+
+        #email notification - push into redis list (will be compiled and e-mailed later by cron)
+        r.lpush("pnr_added_quotes", email_message)
 
 def home(request):
     """
@@ -80,3 +86,45 @@ def home(request):
     """
 
     return render(request, 'home/index.html')
+
+def submit_score(request):
+    """
+    Handles user data (POST)
+    Returns leaderboard data
+    """
+
+    # want to avoid binary strings
+    r = redis.StrictRedis(decode_responses=True)
+
+
+    if request.method == "POST":
+
+        # AngularJS post requires this nonsense
+        request_body = json.loads(request.body.decode('ascii'))    
+
+        user_name = request_body["name"]
+        user_score = request_body["score"]
+
+        # creating salt - useful for identical usernames - keep distinction
+        salt =  ''.join(random.choice(string.ascii_uppercase + string.digits) for _ in range(5))
+        
+        salted_user_name = user_name + salt
+
+        # adding to redis
+        r.zadd("pnr_scores", user_score, salted_user_name)
+
+        # trimming redis set to top 10 scores
+        r.zremrangebyrank("pnr_scores", 0, -10)
+
+        # create python list
+        leaders = []
+
+        for user in r.zrange("pnr_scores", 0, -1):
+            user_score = r.zscore("pnr_scores", user)
+
+            # get rid of salt on user name
+            formatted_user = user[:-5]
+
+            leaders.append({"user": formatted_user, "score": user_score})
+
+        return JsonResponse({"leaders" : leaders})

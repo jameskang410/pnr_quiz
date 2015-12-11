@@ -11,8 +11,7 @@ urlpatterns = patterns('',
     url(r'^admin/', include(admin.site.urls)),
     # Redirects home
     url(r'^$', 'pnr_quiz_site.views.home', name='home'),
-    url(r'^home/', 'pnr_quiz_site.views.home', name='home'),
-
+    url(r'^home/$', 'pnr_quiz_site.views.home', name='home'),
     # API links
     
     # view all quotes/rows
@@ -23,4 +22,7 @@ urlpatterns = patterns('',
     url(r'^api/quiz/$', views.QuizList.as_view(), name='quotes_quiz'),
     # view all distinct persons
     url(r'^api/persons/$', views.PersonList.as_view(), name='persons'),
+
+    url(r'^submitscore/$', 'pnr_quiz_site.views.submit_score', name='submit_score'),
+
 )

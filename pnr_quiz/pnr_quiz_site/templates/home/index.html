@@ -20,10 +20,10 @@
 			</div>
 			<br><br><br><br><br>
 			<button id="start-button" class="btn btn-success btn-lg center-block" ng-click="start()">START THE QUIZ</button>
-<!-- 			<button id="start-button" class="btn btn-success btn-lg center-block" ng-click="testing()">TESTING</button>
- -->		</div>
+<!--  			<button id="start-button" class="btn btn-success btn-lg center-block" ng-click="testing()">TESTING</button> -->
+		</div>
 
-		<!-- POST INTRO - inProgress = true-->
+		<!-- POST INTRO - inProgress = true -->
 		<div class="quizzing" ng-show="inProgress">
 			<div id="score">
 				<h3 class="text-center">Your Score: [[score]]/10</h3>
@@ -56,6 +56,36 @@
 			</div>
 			<!-- QUIZ IS COMPLETE - quizOver = true-->
 			<div ng-show="quizOver">
+				<div class="leaders-board">
+					<div id="user-submit-form">
+						<div ng-show="!submitName">
+							<form name="userForm" class="form-inline">
+								<fieldset class="form-group">
+									<h5>Submit your name and score to see if you made it into the leaderboard</h5>
+									<input class="form-control" placeholder="First Last" ng-model="userName" required name="userName" ng-minlength="3" ng-maxlength="25">
+									<button type="submit" class="btn btn-primary" ng-click="submitScore(userName)" ng-disabled="userForm.userName.$error.required || userForm.userName.$error.minlength || userForm.userName.$error.maxlength">Submit Name</button>
+								</fieldset>
+								<p ng-show="userForm.userName.$error.required || userForm.userName.$error.minlength || userForm.userName.$error.maxlength" class="help-block">Name must be between 3 and 25 characters long</p>
+							</form>
+						</div>
+					</div>
+					<div id="leader-table-div" ng-show="submitName">
+						<div id="table-header">
+							<h3>Quiz Leaders</h3>
+						</div>
+						<table class="table table-striped" id="leader-table">
+							<thead>
+								<tr>
+									<th>Name</th>
+									<th>Score</th>
+							  	</tr>
+							</thead>
+
+							<tbody id="user-scores">
+    						</tbody>
+						</table>
+					</div>
+				</div>
 				<div class="quiz-summary">
 					<h3>Summary of Results:</h3>
 					<br>
