@@ -79,7 +79,7 @@ body {
    Width of this element and angucomplete-dropdown need to match
 */
 #search-field_value {
-	width: 500px;
+	width: 100%;
 	font-family: 'Droid Sans', sans-serif;
 	font-size: 2em;
 	text-align: center;
@@ -87,7 +87,7 @@ body {
 
 /* Changes the actual drop-down */
 .angucomplete-dropdown {
-    width: 500px;
+    width: 100%;
     top: 55px;
     font-family: 'Droid Sans', sans-serif;
     font-size: 1.5em;
@@ -115,7 +115,6 @@ body {
 /* Centering answers - check sign, incorrect sign */
 .centering-icons {
 	padding-top: 50px;
-	width: 20%;
 	margin: 0 auto;
 }
 
@@ -179,8 +178,8 @@ body {
 }
 
 #leader-table-div {
-	padding-left: 250px;
-	padding-right: 250px;
+	padding-left: 20%;
+	padding-right: 20%;
 }
 
 #leader-table {
