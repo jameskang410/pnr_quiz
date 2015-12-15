@@ -1,6 +1,2 @@
-__pycache__/
-*.py[cod]
-
-pnr_env
 *.pyc
-logs/
+venv/
