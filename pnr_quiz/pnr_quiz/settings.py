@@ -66,8 +66,8 @@ DATABASES = {
         'OPTIONS': {
             'options': '-c search_path=pnr'
         },
-        'NAME': 'django',
-        'USER': 'django',
+        'NAME': 'postgres',
+        'USER': 'postgres',
         'PASSWORD': keyring.get_password('django_user','postgres'),
         'HOST': 'localhost',
         'PORT': '5432',
