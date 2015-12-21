@@ -128,3 +128,24 @@ def submit_score(request):
             leaders.append({"user": formatted_user, "score": user_score})
 
         return JsonResponse({"leaders" : leaders})
+
+def leaders(request):
+    """
+    View leaderboard
+    """
+
+    r = redis.StrictRedis(decode_responses=True)
+
+    # create python list
+    leaders = []
+
+    for user in r.zrange("pnr_scores", 0, -1):
+        user_score = r.zscore("pnr_scores", user)
+
+        # get rid of salt on user name
+        formatted_user = user[:-5]
+
+        # insert @ beginning or else list will be upside down
+        leaders.insert(0, {"user": formatted_user, "score": user_score})
+
+    return render(request, 'leaders/leaderboard.html', {"leaders" : leaders})

@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+	<div id="leader-table-div">
+		<div id="table-header">
+			<h3>Quiz Leaders</h3>
+		</div>
+		<table class="table table-striped" id="leader-table">
+			<thead>
+				<tr>
+					<th>Name</th>
+					<th>Score</th>
+			  	</tr>
+			</thead>
+
+			<tbody id="user-scores">
+
+				{% for leader in leaders %}
+				<tr>
+					<td>{{leader.user}}</td>
+					<td>{{leader.score}}</td>
+				</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+	</div>
+
+	<div class="leaders-link">
+		<a href="/">
+			<h4>Back to quiz</h4>
+		</a>
+	</div>
+{% endblock %}

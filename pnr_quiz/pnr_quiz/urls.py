@@ -25,4 +25,6 @@ urlpatterns = patterns('',
 
     url(r'^submitscore/$', 'pnr_quiz_site.views.submit_score', name='submit_score'),
 
+    url(r'^leaders/$', 'pnr_quiz_site.views.leaders', name='leaders'),
+
 )

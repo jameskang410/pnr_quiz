@@ -204,3 +204,8 @@ th {
 }
 
 /* End stuff for the leader table */
+
+.leaders-link {
+	text-align: center;
+	padding-top: 30px;
+}
